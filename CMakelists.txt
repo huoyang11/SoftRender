@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.15)
+
+file(GLOB_RECURSE soft_srcs "${CMAKE_CURRENT_SOURCE_DIR}/src/*.*")
+
+set(GLM_H "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/glm/")
+set(ASSIMP_H "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/assimp/")
+set(STB_IMAGE_H "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/stb_image/")
+
+set(ASSIMP_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/assimp/lib/")
+
+project(SoftRender)
+
+add_executable(${PROJECT_NAME} ${soft_srcs})
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    ${GLM_H}
+    ${ASSIMP_H}
+    ${STB_IMAGE_H}
+)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC
+    ${ASSIMP_LIB_DIR}/assimp-vc142-mt.lib
+)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
